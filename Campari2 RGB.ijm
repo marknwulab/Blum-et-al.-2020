@@ -1,5 +1,8 @@
 macro "Campari RGB Tiffs [C]" {
-//get variables, prior to running load a single image from the folder you will analyze
+//get variables
+//Images should be z-stacks saved in .czi format from one of the LSM confocal microscope but it doesn't matter which one.
+//prior to running load a single image from the folder you will analyze into imageJ
+//When it is completed you should have several folders containing different types of images which can be used for analysis or presentation e.g. grayscale and heatmapped.
 direct=getDirectory("image");
 list = getFileList(direct);
 directgray=direct+"Grayscale Tiffs"+File.separator;
@@ -29,6 +32,7 @@ for (i=0; i<list.length; i++) {
 	selectWindow("MAX_"+name+"-0004");
 	saveAs("Tiff", directgray+"MAX_"+name+"-R2.tif");
 	
+	//This section calculates the heat maps pixel by pixel using the maximum intensity Z projections, These images can then be quantified directly using defined ROIs to avoid some of the leg work of the previously published method.
 	imageCalculator("Divide create 32-bit", "MAX_"+name+"-R2.tif","MAX_"+name+"-R1.tif");
 	imageCalculator("Divide create 32-bit", "MAX_"+name+"-G2.tif","MAX_"+name+"-G1.tif");
 	selectWindow("Result of MAX_"+name+"-G2.tif");
