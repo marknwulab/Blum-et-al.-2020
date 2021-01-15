@@ -1,5 +1,9 @@
 macro "Green Channel Puncta Analysis [C]" {
-//get variables, prior to running load a single image from the folder you will analyze
+//get variables
+//Images should be z-stacks saved in .czi format from one of the LSM confocal microscope but it doesn't matter which one.
+//prior to running load a single image from the folder you will analyze into imageJ
+//a window prompt will open, allowing you to navigate to the top image you want to use as the first slice and then asking you for the total number of slices to use for the analysis, thereby setting the outward bounds of the stacks to use.
+//When it is completed you should have several .csv files which you can open in excel that will provide you with all the raw data (intensity and size) that you will require to make your calculations.
 direct=getDirectory("image");
 list = getFileList(direct);
 directz=direct+"Z-Stack"+File.separator;
